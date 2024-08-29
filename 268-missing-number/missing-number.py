@@ -1,9 +1,9 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        numMap = {}
-        for i in range(len(nums)):
-            numMap[nums[i]] = i
-
+        expectedTotal = 0
         for i in range(len(nums) + 1):
-            if i not in numMap:
-                return i
+            expectedTotal += i
+        cuurentTotal = 0
+        for num in nums:
+            cuurentTotal += num
+        return expectedTotal - cuurentTotal 
