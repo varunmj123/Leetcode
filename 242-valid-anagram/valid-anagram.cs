@@ -1,15 +1,27 @@
 public class Solution {
     public bool IsAnagram(string s, string t) {
-        if (s.Length != t.Length) {
-            return false;
+        // This is just checking frequenct of char in a string 
+        // We can create 2 dictionarys of strings and char freq
+        // If both these dictionaries match then we have an anagram 
+        var freqDictS = new Dictionary<char, int>();
+        var freqDictT = new Dictionary<char, int>();
+        for(int i = 0; i < s.Length; i++){
+            if(!freqDictS.ContainsKey(s[i])){
+                freqDictS[s[i]] = 1;
+            }
+            else{
+                freqDictS[s[i]]++;
+            }
         }
-
-        Dictionary<char, int> countS = new Dictionary<char, int>();
-        Dictionary<char, int> countT = new Dictionary<char, int>();
-        for (int i = 0; i < s.Length; i++) {
-            countS[s[i]] = countS.GetValueOrDefault(s[i], 0) + 1;
-            countT[t[i]] = countT.GetValueOrDefault(t[i], 0) + 1;
+        for(int i = 0; i < t.Length; i++){
+            if(!freqDictT.ContainsKey(t[i])){
+                freqDictT[t[i]] = 1;
+            }
+            else{
+                freqDictT[t[i]]++;
+            }
         }
-        return countS.Count == countT.Count && !countS.Except(countT).Any();
+        return freqDictT.Count == freqDictS.Count && !freqDictT.Except(freqDictS).Any();
+       
     }
 }
